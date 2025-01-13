@@ -1,1 +1,0 @@
-# Es6 basics new text
