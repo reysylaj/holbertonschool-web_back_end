@@ -1,5 +1,3 @@
-// 6-final-user.js
-
 import signUpUser from './4-user-promise';
 import uploadPhoto from './5-photo-reject';
 
@@ -8,8 +6,8 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
   const uploadPromise = uploadPhoto(fileName);
 
   return Promise.allSettled([signUpPromise, uploadPromise])
-    .then(results => {
-      results.map((result => ({
+    .then((results) => {
+      return results.map((result) => ({
         status: result.status,
         value: result.status === 'fulfilled' ? result.value : result.reason,  // No need for .message now
       }));
