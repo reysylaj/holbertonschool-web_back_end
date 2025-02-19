@@ -1,9 +1,5 @@
--- Select bands that have "Glam rock" as their main style and calculate their lifespan
-SELECT band_name, 
-       CASE 
-           WHEN split IS NULL THEN YEAR(CURDATE()) - formed -- Still active bands
-           ELSE split - formed -- Bands that have split
-       END AS lifespan
+-- Durantion current
+SELECT band_name, IFNULL(split, 2024) - formed AS lifespan
 FROM metal_bands
-WHERE style = 'Glam rock'
+WHERE style LIKE '%Glam rock%'
 ORDER BY lifespan DESC;

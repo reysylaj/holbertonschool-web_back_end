@@ -1,10 +1,4 @@
--- Execute the query and limit the result to the top bands
-SELECT band_name, 
-       CASE 
-           WHEN split IS NULL THEN YEAR(CURDATE()) - formed
-           ELSE split - formed
-       END AS lifespan
-FROM metal_bands
-WHERE style = 'Glam rock'
-ORDER BY lifespan DESC
-LIMIT 10;
+#!/bin/bash
+# Look to the file glam rock
+cat metal_bands.sql | mysql -uroot -p holberton
+cat 3-glam_rock.sql | mysql -uroot -p holberton
