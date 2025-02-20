@@ -1,13 +1,11 @@
--- Show users and corrections
+-- Show initial data
 SELECT * FROM users;
 SELECT * FROM corrections;
 
--- Show separator
+-- Call the procedure to compute average score for Jeanne
 SELECT "--";
+CALL ComputeAverageScoreForUser((SELECT id FROM users WHERE name = 'Jeanne'));
 
--- Call the stored procedure for Jeanne
-CALL ComputeAverageScoreForUser((SELECT id FROM users WHERE name = "Jeanne"));
-
--- Show updated users table with average score
+-- Show updated data
 SELECT "--";
 SELECT * FROM users;
