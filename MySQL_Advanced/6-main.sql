@@ -1,16 +1,13 @@
--- Insert sample projects
-INSERT INTO projects (name) VALUES
-('Python is cool'),
-('AI and Machine Learning'),
-('Data Science for All');
+-- Show existing projects and corrections before calling procedure
+SELECT * FROM projects;
+SELECT * FROM corrections;
 
--- Insert sample users
-INSERT INTO users (name) VALUES
-('John Doe'),
-('Jane Smith'),
-('Alice Johnson');
+-- Call AddBonus procedure for Jeanne
+CALL AddBonus((SELECT id FROM users WHERE name = "Jeanne"), "Python is cool", 100);
+CALL AddBonus((SELECT id FROM users WHERE name = "Jeanne"), "Bonus project", 100);
+CALL AddBonus((SELECT id FROM users WHERE name = "Bob"), "Bonus project", 10);
+CALL AddBonus((SELECT id FROM users WHERE name = "Jeanne"), "New bonus", 90);
 
--- Insert sample corrections (if they are not already inserted)
-INSERT INTO corrections (user_id, project_id, score) VALUES
-(1, 1, 100),
-(2, 2, 150);
+-- Show updated projects and corrections after calling procedure
+SELECT * FROM projects;
+SELECT * FROM corrections;

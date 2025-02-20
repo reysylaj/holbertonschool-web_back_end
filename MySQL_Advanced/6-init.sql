@@ -1,35 +1,48 @@
-const mysql = require('mysql');
+-- Initial
+DROP TABLE IF EXISTS corrections;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS projects;
 
-// Database connection configuration
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'yourpassword', // Update with your password
-    database: 'yourdatabase'  // Update with your database name
-});
+CREATE TABLE IF NOT EXISTS users (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    average_score FLOAT DEFAULT 0,
+    PRIMARY KEY (id)
+);
 
-// Connect to the database
-connection.connect(err => {
-    if (err) {
-        console.error('Connection failed: ' + err.stack);
-        return;
-    }
-    console.log('Connected to the database');
-});
+CREATE TABLE IF NOT EXISTS projects (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
 
-// Parameters for calling the procedure
-const user_id = 1; // Example user ID
-const project_name = 'Python is cool'; // Example project name
-const bonus = 100; // Example bonus
+CREATE TABLE IF NOT EXISTS corrections (
+    user_id INT NOT NULL,
+    project_id INT NOT NULL,
+    score INT DEFAULT 0,
+    KEY `user_id` (`user_id`),
+    KEY `project_id` (`project_id`),
+    CONSTRAINT fk_user_id FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+    CONSTRAINT fk_project_id FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
+);
 
-const query = 'CALL AddBonusTest(?, ?, ?)';
-connection.query(query, [user_id, project_name, bonus], (err, results) => {
-    if (err) {
-        console.error('Error executing the procedure: ' + err.message);
-        return;
-    }
-    console.log(`Bonus of ${bonus} added for user ${user_id} in project ${project_name}`);
-});
+-- Insert users
+INSERT INTO users (name) VALUES ("Bob");
+SET @user_bob = LAST_INSERT_ID();
 
-// Close the connection
-connection.end();
+INSERT INTO users (name) VALUES ("Jeanne");
+SET @user_jeanne = LAST_INSERT_ID();
+
+-- Insert projects
+INSERT INTO projects (name) VALUES ("C is fun");
+SET @project_c = LAST_INSERT_ID();
+
+INSERT INTO projects (name) VALUES ("Python is cool");
+SET @project_py = LAST_INSERT_ID();
+
+-- Insert corrections
+INSERT INTO corrections (user_id, project_id, score) VALUES (@user_bob, @project_c, 80);
+INSERT INTO corrections (user_id, project_id, score) VALUES (@user_bob, @project_py, 96);
+
+INSERT INTO corrections (user_id, project_id, score) VALUES (@user_jeanne, @project_c, 91);
+INSERT INTO corrections (user_id, project_id, score) VALUES (@user_jeanne, @project_py, 73);
