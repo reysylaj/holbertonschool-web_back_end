@@ -1,14 +1,9 @@
--- Show initial data
+-- Show and compute average score
 SELECT * FROM users;
 SELECT * FROM corrections;
 
--- Call the procedure to compute average scores
 SELECT "--";
-CALL ComputeAverageScoreForUser(1);
-CALL ComputeAverageScoreForUser(2);
-CALL ComputeAverageScoreForUser(3);
-CALL ComputeAverageScoreForUser(4);
+CALL ComputeAverageScoreForUser((SELECT id FROM users WHERE name = "Jeanne"));
 
--- Show updated data
 SELECT "--";
 SELECT * FROM users;
