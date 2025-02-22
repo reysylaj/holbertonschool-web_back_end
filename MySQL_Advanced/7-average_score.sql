@@ -9,10 +9,10 @@ BEGIN
     FROM corrections
     WHERE user_id = user_id_param;
 
-    -- Debugging: Check if avg_score is being calculated correctly
-    SELECT avg_score AS debug_avg_score;
+    -- Debugging: Print the calculated average (Remove this in final version)
+    SELECT user_id_param AS "User ID", avg_score AS "Calculated Average";
 
-    -- Update the user's average_score in the users table
+    -- Update user's average_score in the users table
     UPDATE users 
     SET average_score = avg_score
     WHERE id = user_id_param;
