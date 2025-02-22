@@ -9,7 +9,7 @@ BEGIN
     FROM corrections
     WHERE user_id = user_id_param;
 
-    -- Debugging: Print the calculated average (Remove this in final version)
+    -- Debugging: Print the calculated average
     SELECT user_id_param AS "User ID", avg_score AS "Calculated Average";
 
     -- Update user's average_score in the users table

@@ -1,8 +1,5 @@
--- Initialization script for users, projects, and corrections
 USE d_4896;
 
-
--- Drop previous tables and procedure if they exist
 DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
 DROP TABLE IF EXISTS corrections;
 DROP TABLE IF EXISTS users;
