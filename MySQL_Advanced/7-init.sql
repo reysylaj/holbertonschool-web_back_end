@@ -1,3 +1,5 @@
+-- Initialization script for users, projects, and corrections
+
 -- Drop previous tables and procedure if they exist
 DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
 DROP TABLE IF EXISTS corrections;
@@ -6,24 +8,24 @@ DROP TABLE IF EXISTS projects;
 
 -- Create users table
 CREATE TABLE IF NOT EXISTS users (
-    id int not null AUTO_INCREMENT,
-    name varchar(255) not null,
-    average_score float default 0,
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    average_score FLOAT DEFAULT 0,
     PRIMARY KEY (id)
 );
 
 -- Create projects table
 CREATE TABLE IF NOT EXISTS projects (
-    id int not null AUTO_INCREMENT,
-    name varchar(255) not null,
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
 
 -- Create corrections table
 CREATE TABLE IF NOT EXISTS corrections (
-    user_id int not null,
-    project_id int not null,
-    score int default 0,
+    user_id INT NOT NULL,
+    project_id INT NOT NULL,
+    score INT DEFAULT 0,
     KEY `user_id` (`user_id`),
     KEY `project_id` (`project_id`),
     CONSTRAINT fk_user_id FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,

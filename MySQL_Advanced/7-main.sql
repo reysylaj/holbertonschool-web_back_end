@@ -4,7 +4,8 @@ SELECT * FROM corrections;
 
 -- Call the procedure to compute average score for Jeanne
 SELECT "--";
-CALL ComputeAverageScoreForUser((SELECT id FROM users WHERE name = 'Jeanne'));
+SET @jeanne_id = (SELECT id FROM users WHERE name = 'Jeanne');
+CALL ComputeAverageScoreForUser(@jeanne_id);
 
 -- Show updated data
 SELECT "--";
