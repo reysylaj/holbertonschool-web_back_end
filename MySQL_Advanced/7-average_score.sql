@@ -1,3 +1,6 @@
+--use db
+USE amitdb;
+
 DELIMITER $$
 
 CREATE PROCEDURE ComputeAverageScoreForUser(IN user_id_param INT)

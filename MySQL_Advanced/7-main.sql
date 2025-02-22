@@ -1,4 +1,6 @@
 -- Show initial data
+USE amitdb;
+
 SELECT * FROM users;
 SELECT * FROM corrections;
 

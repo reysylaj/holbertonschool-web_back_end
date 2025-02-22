@@ -1,4 +1,5 @@
 -- Initialization script for users, projects, and corrections
+USE amitdb;
 
 -- Drop previous tables and procedure if they exist
 DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
